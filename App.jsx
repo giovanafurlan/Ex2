@@ -27,11 +27,11 @@ const App = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <Text style={styles.titleText}>
-          Login
+          Lista
         </Text>
         <View style={styles.flex}>
           <TextInput
-            placeholder="Digite seu username"
+            placeholder="Digite o item"
             value={item}
             onChangeText={(data) => setItem(data)}
             underlineColorAndroid="transparent"
