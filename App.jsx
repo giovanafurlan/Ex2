@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FlatList } from 'react-native-web';
 
 const App = () => {
   const [item, setItem] = useState("");
@@ -19,7 +20,7 @@ const App = () => {
 
     AsyncStorage.getItem('user').then(
       (value) =>
-        setList([...list, value])
+        setList([...list, ...value])
     );
   };
 
@@ -40,14 +41,15 @@ const App = () => {
           <TouchableOpacity
             onPress={saveValueFunction}
             style={styles.buttonStyle}>
-            <Text style={styles.buttonTextStyle}> Salvar </Text>
+            <Text style={styles.buttonTextStyle}> Adicionar </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.flex2}>
-          <Text>            
-            {list}
-          </Text>
-        </View>
+          <FlatList
+            data={[
+              { key: list }
+            ]}
+            renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
+          />
       </View>
     </SafeAreaView>
   );
@@ -96,6 +98,11 @@ const styles = StyleSheet.create({
   flex2: {
     display: 'flex',
     flexDirection: 'column'
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
   }
 });
 
